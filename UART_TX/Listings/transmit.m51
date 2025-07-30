@@ -1,0 +1,167 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    07/30/2025  13:58:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\uart_tx.obj TO .\Objects\transmit PRINT (.\Listings\transmi
+>> t.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\uart_tx.obj (UART_TX)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SLCMP)
+
+
+LINK MAP OF MODULE:  .\Objects\transmit (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     003FH     UNIT         ?PR?DELAY?UART_TX
+            CODE    083FH     002FH     UNIT         ?C?LIB_CODE
+            CODE    086EH     0028H     UNIT         ?PR?_SEND?UART_TX
+            CODE    0896H     0017H     UNIT         ?PR?MAIN?UART_TX
+            CODE    08ADH     000CH     UNIT         ?C_C51STARTUP
+            CODE    08B9H     000AH     UNIT         ?CO?UART_TX
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\transmit (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?UART_TX
+
+?PR?MAIN?UART_TX               -----    -----
+  +--> ?CO?UART_TX
+  +--> ?PR?_SEND?UART_TX
+  +--> ?PR?DELAY?UART_TX
+
+?PR?_SEND?UART_TX              0008H    0003H
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\transmit (?C_STARTUP)
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  07/30/2025  13:58:42  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:08ADH         SEGMENT       ?C_C51STARTUP
+  I:000BH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:08B0H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:08ADH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:08ADH         LINE#         133
+  C:08AFH         LINE#         134
+  C:08B0H         LINE#         135
+  C:08B1H         LINE#         136
+  C:08B3H         LINE#         185
+  C:08B6H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        UART_TX
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0800H         PUBLIC        delay
+  D:00B8H         PUBLIC        IP
+  B:0098H.1       PUBLIC        TI
+  C:0896H         PUBLIC        main
+  C:086EH         PUBLIC        _send
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0896H         LINE#         6
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  07/30/2025  13:58:42  PAGE 3
+
+
+  C:0896H         LINE#         7
+  C:0899H         LINE#         8
+  C:089CH         LINE#         9
+  C:089FH         LINE#         10
+  C:08A1H         LINE#         11
+  C:08AAH         LINE#         12
+  -------         ENDPROC       MAIN
+  -------         PROC          _SEND
+  D:0008H         SYMBOL        s
+  C:086EH         LINE#         16
+  C:0874H         LINE#         17
+  C:087FH         LINE#         18
+  C:088EH         LINE#         20
+  C:0891H         LINE#         21
+  C:0893H         LINE#         23
+  C:0895H         LINE#         24
+  -------         ENDPROC       _SEND
+  -------         PROC          DELAY
+  -------         DO            
+  D:0082H         SYMBOL        i
+  -------         ENDDO         
+  C:0800H         LINE#         26
+  C:0800H         LINE#         28
+  C:081BH         LINE#         29
+  C:083BH         LINE#         30
+  C:083EH         LINE#         31
+  -------         ENDPROC       DELAY
+  -------         ENDMOD        UART_TX
+
+  -------         MODULE        ?C?CLDPTR
+  C:083FH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SLCMP
+  C:0858H         PUBLIC        ?C?SLCMP
+  -------         ENDMOD        ?C?SLCMP
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0097H BYTE ( 7%) *
+******************************************************************************
+
+Program Size: data=12.0 xdata=0 code=198
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

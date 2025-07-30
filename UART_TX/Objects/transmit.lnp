@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\uart_tx.obj" 
+TO ".\Objects\transmit" 
+PRINT(".\Listings\transmit.m51") RAMSIZE(256) 
