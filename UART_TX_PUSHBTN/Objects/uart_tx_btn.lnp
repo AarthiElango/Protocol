@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\txrx_btn.obj" 
+TO ".\Objects\uart_tx_btn" 
+PRINT(".\Listings\uart_tx_btn.m51") RAMSIZE(256) 

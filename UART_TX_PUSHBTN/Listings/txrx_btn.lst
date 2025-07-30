@@ -1,0 +1,120 @@
+C51 COMPILER V9.60.7.0   TXRX_BTN                                                          07/30/2025 14:09:42 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TXRX_BTN
+OBJECT MODULE PLACED IN .\Objects\txrx_btn.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE txrx_btn.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -txrx_btn.lst) TABS(2) OBJECT(.\Objects\txrx_btn.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #define lcd P2
+   3          sbit rs=P1^0;
+   4          sbit rw=P1^1;
+   5          sbit en=P1^2;
+   6          sbit btn=P3^3;
+   7          sbit led=P0^0;
+   8          
+   9          void delay();
+  10          void lcd_cmd(int x);
+  11          void lcd_data(unsigned char c);
+  12          void lcd_init();
+  13          void send(unsigned char *s);
+  14          
+  15          void lcd_init(){
+  16   1        lcd_cmd(0x38);
+  17   1        delay() ;
+  18   1        lcd_cmd(0x01);
+  19   1        delay();
+  20   1        lcd_cmd(0x80);
+  21   1        delay();
+  22   1        lcd_cmd(0x0c);
+  23   1        delay();
+  24   1      }
+  25          void lcd_cmd(int x){
+  26   1        en=1;
+  27   1        rs=0;
+  28   1        rw=0;
+  29   1        lcd=x;
+  30   1        delay();
+  31   1        en=0;
+  32   1      }
+  33          
+  34          void lcd_data(unsigned char c){
+  35   1        en=1;
+  36   1        rs=1;
+  37   1        rw=0;
+  38   1        lcd=c;
+  39   1        delay();
+  40   1        en=0;
+  41   1      }
+  42          
+  43          void send(unsigned char *s){
+  44   1        while(*s){
+  45   2          unsigned char temp = *s++;
+  46   2          if (btn) {
+  47   3           SBUF = temp;
+  48   3           lcd_data(temp);
+  49   3           while(TI==0);
+  50   3             led=1;
+  51   3             TI=0;
+  52   3             led=0;
+  53   3                  }
+  54   2                }
+C51 COMPILER V9.60.7.0   TXRX_BTN                                                          07/30/2025 14:09:42 PAGE 2   
+
+  55   1            }
+  56            
+  57          
+  58          void delay(){
+  59   1         int i,j;
+  60   1        for(i=0;i<500;i++){
+  61   2         for(j=0;j<500;j++);
+  62   2        }
+  63   1       }
+  64          
+  65           int main()
+  66           {
+  67   1        unsigned char ch;
+  68   1        TMOD=0x20;
+  69   1        SCON=0x50;
+  70   1        TH1=0xfd;
+  71   1        TR1=1;
+  72   1        lcd_init();
+  73   1        lcd_cmd(0x80);
+  74   1         
+  75   1         send("helloo\r\n");
+  76   1         
+  77   1        while(1){ 
+  78   2        while(RI==0);
+  79   2         ch=SBUF;
+  80   2        RI=0;
+  81   2        
+  82   2        lcd_data(ch);
+  83   2        
+  84   2        //transmit received data 
+  85   2        SBUF=ch ;  
+  86   2        while(TI==0);
+  87   2        TI=0;
+  88   2      
+  89   2      }
+  90   1        return 0;
+  91   1       }
+  92           
+  93           
+*** WARNING C294 IN LINE 90 OF txrx_btn.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    204    ----
+   CONSTANT SIZE    =      9    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
