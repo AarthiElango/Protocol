@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\uart_txrx.obj" 
+TO ".\Objects\uart_lcd" 
+PRINT(".\Listings\uart_lcd.m51") RAMSIZE(256) 
